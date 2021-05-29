@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- Filter form -->
+<form class="" id="regForm" enctype="multipart/form-data" method="post" style="background-color:#a0bcd0; padding:100px; border-radius:20px;"
+      action="">
+    {% csrf_token %}
+    <h1 style="text-align:center; margin-bottom:20px;">Add Issue </h1>
+    <h5 style="color:red;">{{error}}</h5>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="position-relative form-group">
+                <label for="name" class="">Name</label><span style="color:red; font-size:20px">*</span>
+                <input name="name" id="name" value="{{user.first_name}}" required placeholder="Enter Name"
+                       type="text"
+                       class="form-control">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="position-relative form-group">
+                <label for="gender" class="" style="margin-top:8px;">Gender</label><span style="color:red; font-size:20px">*</span>
+                <select id="gender" name="gender"  required class="form-control">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Transgender">Transgender</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="position-relative form-group">
+                <label for="issue" class="">Issue</label><span style="color:red; font-size:20px">*</span>
+                <input name="issue" id="issue" value="" required  placeholder="First Issue"
+                       type="text"
+                       class="form-control">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="position-relative form-group">
+                <label for="file" class="" style="margin-top:8px;">Select File</label><span style="color:red; font-size:20px">*</span>
+                <input type="file" class="form-control"  onchange="Filevalidation()" name="file" required id="file" accept="image/*">
+                 <p id="size" style="color:red;"></p>
+
+            </div>
+        </div>
+    </div>
+    <div class="row" style="text-align:center; margin-top:20px;">
+        <button type="button" id="submit_from" class="btn btn-primary" >Submit</button>
+
+    </div>
+
+</form>
+
+<script>
+    Filevalidation = () => {
+        const fi = document.getElementById('file');
+        if (fi.files.length > 0) {
+
+            for (const i = 0; i <= fi.files.length - 1; i++)
+            {
+
+                const fsize = fi.files.item(i).size;
+                const file = Math.round((fsize / 1024));
+                // The size of the file.
+                if (file >= 60)
+                {
+                 document.getElementById('size').innerHTML = '<b>Your File size is '
+                    + file + 'KB please enter less then 60kb image size</b> KB';
+                    const subm = document.getElementById('submit_from');
+                subm.type = "button";
+                }
+                else if (file <= 60 && file>0){
+                document.getElementById('size').innerHTML = "";
+                const subm = document.getElementById('submit_from');
+                subm.type = "submit";
+
+
+                }
+            }
+        }
+    }
+</script>
+
+{% endblock %}
