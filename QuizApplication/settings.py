@@ -25,8 +25,9 @@ SECRET_KEY = '005yty=g0kl5ij9g6vk7!$xif-$93e+smx(ah=u2jg2(@x%fz#'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 
 # Application definition
 
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'sorl.thumbnail',
     'Apps.Quiz',
+    'Apps.issue',
 ]
 
 MIDDLEWARE = [
