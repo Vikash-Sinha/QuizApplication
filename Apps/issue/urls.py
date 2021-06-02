@@ -6,5 +6,5 @@ from django.conf import settings
 from django.conf.urls.static import *
 
 urlpatterns = [
-    path('add-issue', AddIssue.as_view(), name="add_issue"),
+    path('/', AddIssue.as_view(), name="add_issue"),
     ]+ static(settings.MEDIA_URL, document_root =settings.MEDIA_ROOT)
