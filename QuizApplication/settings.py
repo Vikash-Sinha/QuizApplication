@@ -30,7 +30,8 @@ ALLOWED_HOSTS = ['*']
 os.environ["DJANGO_ALLOW_ASYNC_UNSAFE"] = "true"
 
 # Application definition
-
+domain = 'http://127.0.0.1:8000/'
+sub_domain = 'http://127.0.0.1:8000/'
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',

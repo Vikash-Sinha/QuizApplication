@@ -8,7 +8,8 @@ from django.contrib import messages
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib.auth.models import Group
 from QuizApplication.settings import *
-
+from django.urls import resolve
+from django.http import Http404
 def mail_send_fun(request, subject, to_email, name,gender):
     message = 'New Issue has been added by ' + name + " and " + gender
     if subject and message:
@@ -26,7 +27,10 @@ def mail_send_fun(request, subject, to_email, name,gender):
 class AddIssue(View):
     template = 'Quiz/add_issue.html'
     def get(self,request):
-        return render(request, self.template)
+        if request.META['SERVER_PORT'] =='8000':
+            return render(request, self.template)
+        else:
+            return redirect('quiz_list')
     def post(self,request):
        obj = Quizs()
        obj.name = request.POST.get('name')
